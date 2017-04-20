@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-node-excel-export/node_modules/node-excel-export/lib/excel.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-node-excel-export">npmtest-node-excel-export (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-node-excel-export/node_modules/node-excel-export/lib/excel.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">7.14% <small>(5 / 70)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 42)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">8.93% <small>(5 / 56)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-node-excel-export/node_modules/node-excel-export/lib/</a> &#187; excel.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
+&nbsp;
+const XLSX = require('xlsx-style');
+&nbsp;
+<span class="fstat-no" title="function not covered" >function datenum(v, date1904) {</span>
+<span class="cstat-no" title="statement not covered" >  if(date1904) <span class="cstat-no" title="statement not covered" >v += 1462;</span></span>
+<span class="cstat-no" title="statement not covered" >  let epoch = Date.parse(v);</span>
+<span class="cstat-no" title="statement not covered" >  return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function sheet_from_array_of_arrays(data, merges) {</span>
+<span class="cstat-no" title="statement not covered" >  let ws = {};</span>
+<span class="cstat-no" title="statement not covered" >  let range = {s: {c:10000000, r:10000000}, e: {c:0, r:0}};</span>
+<span class="cstat-no" title="statement not covered" >  for(let R = 0; R !== data.length; ++R) {</span>
+<span class="cstat-no" title="statement not covered" >    for(let C = 0; C !== data[R].length; ++C) {</span>
+<span class="cstat-no" title="statement not covered" >      if(range.s.r &gt; R) <span class="cstat-no" title="statement not covered" >range.s.r = R;</span></span>
+<span class="cstat-no" title="statement not covered" >      if(range.s.c &gt; C) <span class="cstat-no" title="statement not covered" >range.s.c = C;</span></span>
+<span class="cstat-no" title="statement not covered" >      if(range.e.r &lt; R) <span class="cstat-no" title="statement not covered" >range.e.r = R;</span></span>
+<span class="cstat-no" title="statement not covered" >      if(range.e.c &lt; C) <span class="cstat-no" title="statement not covered" >range.e.c = C;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      let cell;</span>
+<span class="cstat-no" title="statement not covered" >      if(data[R][C] &amp;&amp; typeof data[R][C] === 'object' &amp;&amp; data[R][C].style &amp;&amp; !(data[R][C] instanceof Date)) {</span>
+<span class="cstat-no" title="statement not covered" >        cell = {</span>
+          v: data[R][C].value,
+          s: data[R][C].style
+        };
+      } else {
+<span class="cstat-no" title="statement not covered" >        cell = {v: data[R][C] };</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if(cell.v === null) <span class="cstat-no" title="statement not covered" >continue;</span></span>
+<span class="cstat-no" title="statement not covered" >      let cell_ref = XLSX.utils.encode_cell({c:C,r:R});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if(typeof cell.v === 'number') <span class="cstat-no" title="statement not covered" >cell.t = 'n';</span></span>
+      else <span class="cstat-no" title="statement not covered" >if(typeof cell.v === 'boolean') <span class="cstat-no" title="statement not covered" >cell.t = 'b';</span></span>
+      else <span class="cstat-no" title="statement not covered" >if(cell.v instanceof Date) {</span>
+<span class="cstat-no" title="statement not covered" >        cell.t = 'n'; <span class="cstat-no" title="statement not covered" ></span>cell.z = XLSX.SSF._table[14];</span>
+<span class="cstat-no" title="statement not covered" >        cell.v = datenum(cell.v);</span>
+      }
+      else <span class="cstat-no" title="statement not covered" >cell.t = 's';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      ws[cell_ref] = cell;</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (merges) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!ws['!merges']) <span class="cstat-no" title="statement not covered" >ws['!merges'] = [];</span></span>
+<span class="cstat-no" title="statement not covered" >    merges.forEach(<span class="fstat-no" title="function not covered" >function (merge) {</span></span>
+<span class="cstat-no" title="statement not covered" >        ws['!merges'].push({</span>
+          s: {
+            r: merge.start.row - 1,
+            c: merge.start.column - 1
+          },
+          e: {
+            r: merge.end.row - 1,
+            c: merge.end.column - 1
+          }
+        });
+    });
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if(range.s.c &lt; 10000000) <span class="cstat-no" title="statement not covered" >ws['!ref'] = XLSX.utils.encode_range(range);</span></span>
+<span class="cstat-no" title="statement not covered" >  return ws;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function Workbook() {</span>
+<span class="cstat-no" title="statement not covered" >  if(!(this instanceof Workbook)) <span class="cstat-no" title="statement not covered" >return new Workbook();</span></span>
+<span class="cstat-no" title="statement not covered" >  this.SheetNames = [];</span>
+<span class="cstat-no" title="statement not covered" >  this.Sheets = {};</span>
+}
+&nbsp;
+module.exports = {
+  parse: <span class="fstat-no" title="function not covered" >function(mixed, options) {</span>
+<span class="cstat-no" title="statement not covered" >    let ws;</span>
+<span class="cstat-no" title="statement not covered" >    if(typeof mixed === 'string') <span class="cstat-no" title="statement not covered" >ws = XLSX.readFile(mixed, options);</span></span>
+    else <span class="cstat-no" title="statement not covered" >ws = XLSX.read(mixed, options);</span>
+<span class="cstat-no" title="statement not covered" >    return _.map(ws.Sheets, <span class="fstat-no" title="function not covered" >function(sheet, name) {</span></span>
+<span class="cstat-no" title="statement not covered" >      return {name: name, data: XLSX.utils.sheet_to_json(sheet, {header: 1, raw: true})};</span>
+    });
+  },
+  build: <span class="fstat-no" title="function not covered" >function(array) {</span>
+<span class="cstat-no" title="statement not covered" >    let defaults = {</span>
+      bookType:'xlsx',
+      bookSST: false,
+      type:'binary'
+    };
+<span class="cstat-no" title="statement not covered" >    let wb = new Workbook();</span>
+<span class="cstat-no" title="statement not covered" >    array.forEach(<span class="fstat-no" title="function not covered" >function(worksheet) {</span></span>
+<span class="cstat-no" title="statement not covered" >      let name = worksheet.name || 'Sheet';</span>
+<span class="cstat-no" title="statement not covered" >      let data = sheet_from_array_of_arrays(worksheet.data || [], worksheet.merge);</span>
+<span class="cstat-no" title="statement not covered" >      wb.SheetNames.push(name);</span>
+<span class="cstat-no" title="statement not covered" >      wb.Sheets[name] = data;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if(worksheet.config.cols) {</span>
+<span class="cstat-no" title="statement not covered" >        wb.Sheets[name]['!cols'] = worksheet.config.cols</span>
+      }
+&nbsp;
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    let data = XLSX.write(wb, defaults);</span>
+<span class="cstat-no" title="statement not covered" >    if(!data) <span class="cstat-no" title="statement not covered" >return false;</span></span>
+<span class="cstat-no" title="statement not covered" >    let buffer = new Buffer(data, 'binary');</span>
+<span class="cstat-no" title="statement not covered" >    return buffer;</span>
+&nbsp;
+  }
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 19:24:13 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
